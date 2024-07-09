@@ -1,0 +1,15 @@
+<!-- base.html 상속 -->
+{% extends 'base.html' %}
+
+<!-- base.thml의 block에 삽입될 코드 -->
+{% block content %}
+
+  <div>
+
+    <!-- article_list이름의 데이터를 넘겨주고 snippets/list_fragment.html을 여기에 삽입,  -->
+    {% include 'snippets/list_fragment.html' with article_list=article_list %}
+
+  </div>
+
+  <!-- block 끝 -->
+{% endblock %}

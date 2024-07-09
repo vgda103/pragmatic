@@ -1,0 +1,112 @@
+<!-- base.html 상속 -->
+{% extends 'base.html' %}
+
+<!-- 스테틱 사용 선언 -->
+{% load static %}
+
+<!-- base의 block 삽입 될코드 -->
+{% block content %}
+
+<!-- 기본 -->
+<style>
+
+  /* 38강 모바일디버깅 */
+  .container {
+    padding: 0;
+    margin: 0, auto;
+  }
+
+  /* 38강 모바일디버깅 */
+  .container a {
+    width: 45%;
+    max-width: 250px;
+  }
+
+  .container div {
+  /* 38강 모바일디버깅 삭제 */
+  /* width: 280px; */
+  /* height: 500px; */
+  /* 38강 모바일디버깅 삭제 */
+  /* background-color: antiquewhite; */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 8px;
+  border-radius: 1rem;
+}
+
+.container img {
+  width: 100%;
+  border-radius: 1rem;
+}
+
+/* 34강. magicgrid - 삭제 */
+/* .container .item1 { height: 200px; }
+.container .item4 { height: 800px; }
+.container .item6 { height: 600px; }
+.container .item11 { height: 400px; } */
+
+</style>
+
+
+<!-- 36강 리스트뷰 -->
+{% if article_list %}
+  {# 기본 #}
+  <div class="container">
+
+    <!-- 기존코드
+    36강 리스트뷰 에서 삭제
+    <div class="item1"> * 13개 
+      https://picsum.photos/200/300 : 에서 200*300 사이즈의 임의의 사진을 받아온다
+      <img src="https://picsum.photos/200/300" alt="">
+    </div>   -->
+    
+      {% for article in article_list %}
+        <a href="{% url 'articleapp:detail' pk=article.pk %}">
+          {# 기존 #}
+          <!-- <div>
+            <img src="{{ article.image.url }}" alt="">
+          </div> -->
+
+          {# 36강 리스트뷰 #}
+          {# include : 탬플릿에서 다른 탬플릿 파일을 연결한다 #}
+          {# with article=article : article란 이름으로 article을 전달한다 #}
+          {% include 'snippets/card.html' with article=article %}
+
+        </a>
+
+        {% endfor %} {# for article 끝 #}
+
+  </div>
+  
+  <script src="{% static 'js/magicgrid.js' %}" ></script>
+  {# if문 끝 #}
+
+{% else %}
+  <div class="text-center">
+    <h1>No Article YET!</h1>
+  </div>
+
+  {% endif %} {# if article_list 끝 #}
+
+<!-- 36강 리스트뷰 -->
+<!-- 패이지 표시 -->
+<!-- pag_obj는 ListVeiw의 하위 클레스 -->
+<!-- 'snippets/pagination.html' 경로의 파일을 포함(include)하고, 
+      pag_obj 변수를 해당 템플릿에 전달 -->
+{% include 'snippets/pagination.html' with pag_obj=pag_obj %}
+
+<!-- 35강 Article 구현 -->
+<div style="text-align: center;" >
+  <a href="{% url 'articleapp:create' %}" 
+    class="btn btn-dark rounded-pill col-3 mt-3 px-3" >
+    Cerate Article
+  </a>
+</div>
+
+<!-- 기존 -->
+<!-- 36강 리스트뷰 - 이동 -->
+<!-- <script src="{% static 'js/magicgrid.js' %}" ></script> -->
+
+<!-- base의 block 삽입 될코드 끝 -->
+{% endblock %}

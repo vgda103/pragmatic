@@ -1,0 +1,33 @@
+<!-- base.html 사아송 -->
+{% extends 'base.html' %}
+
+<!-- 부스트스트랩 사용 선언 -->
+{% load bootstrap5 %}
+
+<!-- base.html의 block content에 삽입될 코드 -->
+{% block content %}
+
+<div style="text-align: center; max-width: 500px; margin: 4rem auto;">
+
+  <!-- 제목 -->
+  <div class="mb-4">
+    <h4>Project Create</h4>
+  </div>
+
+  <!-- post형식으로 url에 요청을 보낸다. 옵션으로 enctype 형식으로 파일 처리 -->
+  <form action="{% url 'projectapp:create' %}" method="post" enctype="multipart/form-data">
+    <!-- 장고에서 제공하는 보안기능, post 요청시 반드시 필요 -->
+    {% csrf_token %}
+
+    <!-- 부스트스트랩 form 적용 -->
+    {% bootstrap_form form %}
+
+    <!-- 요청 버튼 -->
+    <input type="submit" class="btn btn-dark rounded-pill col-6 mt-3">
+
+  </form>
+
+</div>
+
+<!-- base.html의 block content에 삽입될 코드 끝 -->
+{% endblock %}

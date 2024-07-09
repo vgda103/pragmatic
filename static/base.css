@@ -1,0 +1,46 @@
+.pragmatic_header {
+  text-align: center;
+  margin-top: 2rem;
+}
+
+.pragmatic_header_navigator {
+  text-align: center;
+  margin-top: 2rem;
+}
+
+.pragmatic_footer {
+  text-align: center; 
+  margin-top: 2rem;
+}
+
+.pragmatic_footer_button {
+  font-size: 0.9rem;
+}
+
+.Pragmatic_log {
+  font-family: 'Lobster', sans-serif;
+}
+
+@media screen and ( max-width:500px ) {
+  html {
+    font-size: 13px;
+  }
+}
+
+a {
+  color: black;
+  text-decoration: none;
+}
+
+/* 마우스가 위(오버)에 있는 상태 */
+a:hover {
+  color: black;
+}
+
+.prgmatic_header_nav {
+  margin: 0 0.5rem;
+}
+
+.pragmatic_header_navbar {
+  margin: 1rem 0;
+}

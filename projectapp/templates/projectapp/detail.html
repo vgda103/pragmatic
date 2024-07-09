@@ -1,0 +1,72 @@
+<!-- base.html 상속 -->
+{% extends 'base.html' %}
+
+<!-- block에 삽입될 코드 -->
+{% block content %}
+
+<div>
+  
+  <!-- 42강 Redirect 수정 -->
+  <!-- 기존 -->
+  <!-- <div style="text-align: center; max-width: 700px; margin: 4rem auto;"> -->
+  <div style="text-align: center; max-width: 700px; margin: 4rem auto 1.5rem auto;">
+    
+    <!-- 36강 아티클 구현 - style 추가 -->
+    <!-- context_object_name의 이미지 출력,  -->
+    <img style="height: 12rem; width: 12rem; border-radius: 2rem; margin-bottom: 2rem;" 
+      src="{{ target_project.image.url }}" alt="">
+    
+    <h2 style="font-family: 'NanumSquareB';">
+      <!-- views의 context_object.title의 멤버 출력 -->
+      {{ target_project.title }}
+    </h2>
+
+    <!-- 42강 Redirect 수정 -->
+    <!-- <h5 style="margin-bottom: 3rem;" > 기존 -->
+    <h5>
+      <!-- views의 context_object.description의 멤버 출력 -->
+      {{ target_project.description }}
+    </h5>
+
+  </div>
+
+  <!-- 42강 RedirectView 추가 -->
+  <div class="text-center mb-5">
+    <!-- 로그인 되어 있는지 확인 -->
+    {% if user.is_authenticated %}
+
+      <!-- 구독이 되어 있는지 -->
+      {% if not subscription %}
+
+        <!-- project_pk에 {{ target_project.pk }} 실어서 해당 주소로 요청을 보낸다 -->
+        <a href="{% url 'subscribeapp:subscribe' %}?project_pk={{ target_project.pk }}"
+          class="btn btn-primary rounded-pill px-4">
+          Subscribe
+        </a>
+        {# if 끝 #}
+
+      <!-- 구독이 안되었을때 -->
+      {% else %}
+
+        <!-- project_pk에 {{ target_project.pk }} 실어서 해당 주소로 요청을 보낸다 -->
+        <a href="{% url 'subscribeapp:subscribe' %}?project_pk={{ target_project.pk }}"
+          class="btn btn-dark rounded-pill px-4">
+          UnSubscribe
+        </a>
+
+       {% endif %} {#  if not subscription #}
+
+      {% endif %} {# if user.is_authenticated 끝 #}
+      
+  </div>
+  
+  <div>
+    <!-- snippets/list_fragment.html의 내용을 삽입, 
+      article_list 이름에 object_list 값을넘겨줌 -->
+    {% include 'snippets/list_fragment.html' with article_list=object_list %}
+  </div>
+
+</div>
+
+<!-- 블록 끝 -->
+{% endblock %}

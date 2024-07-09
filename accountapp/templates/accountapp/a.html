@@ -1,0 +1,116 @@
+<!-- base.html 상속 -->
+{% extends 'base.html' %}
+
+<!-- block 에 삽입될 코드 -->
+{% block content %}
+
+<div>
+
+  <div style="text-align: center; max-width: 500px; margin: 4rem auto;">
+
+    <!-- <p> -->
+      <!-- 가입날짜 -->
+      <!-- 기존 -->
+      <!-- {{ user.date_joined }} -->
+      <!-- 24강 DetailView 수정 -->
+      <!-- 32강 프로파일 마무리 - 삭제 -->
+      <!-- {{ target_user.date_joined }} -->
+    <!-- </p> -->
+
+    <!-- 32강 프로파일 마무리 추가 -->
+    <!-- 33강 get_success_url 에서 삭제 또는 이동 -->
+    <!-- <img src="{{ target_user.profile.image.url }}" alt=""
+      style="height: 12rem; width: 12rem; border-radius: 20rem; margin-bottom: 2rem;"> -->
+
+    <!-- 31강. 프로파일 구현 -->
+    <!-- django 문 사용시 주석은 {# #}으로 사용해야함 -->
+    <!-- target_user에 profile값이 존제 하면 -->
+     {% if target_user.profile %}  
+    
+      {# 33강 get_success_url 에서 추가 또는 이동 #}
+      <img src="{{ target_user.profile.image.url }}" alt=""
+        style="height: 12rem; width: 12rem; border-radius: 20rem; margin-bottom: 2rem;">
+
+      <h2 style="font-family: 'NanumSquareB';">
+        {# 유저 이름 #}
+        {# 기존 #}
+        {# {{ user.username }} #}
+        {# 24강 DetailView 수정 #}
+        {# {{ target_user.username }} #}
+        {# 31강. 프로파일 구현, 수정 #}
+        {# 닉네임 값 출력 #}
+        {{ target_user.profile.nickname }}
+
+        {# 33강 get_success_url 에서 추가 #}
+        {% if target_user == user %}
+          {# 32강 프로파일 마무리 #}
+          <a href="{% url 'profileapp:update' pk=target_user.profile.pk %}">
+            edit
+          </a>
+          {% endif %} {# if target_user 끝 #}
+      </h2>
+
+      {# 33강 get_success_url 에서 추가 또는 이동 #}
+      <h5 style="margin-bottom: 3rem;" >
+        {{ target_user.profile.message }}
+      </h5>
+
+      {# if target_user.profile 끝 #}
+
+    {# 아닌경우 #}
+    {% else %} 
+
+      {# 33강 get_success_url 에서 if 추가 #}
+      {% if target_user == user %}
+
+        {# 33강 get_success_url 전에 있던거 #}
+        {# 프로파일을 만들 패이지로 연결 #}
+        <a href=" {% url 'profileapp:create' %} ">
+          <h2 style="font-family: 'NanumSquareB';">
+            Create Profile
+          </h2>
+        </a>
+
+        {# if target_user 끝 #}
+
+      {% else %}
+        <h2>
+          닉네임 미설정
+        </h2>
+
+        {% endif %} {# if target_user 끝 #}
+
+    {# {% target_user.profile %} if 문 else 끝 #}
+    {% endif %}
+
+    <!-- 32강 프로필 마무리 -->
+    <!-- 33강 get_success_url 에서 삭제 또는 이동 -->
+    <!-- <h5 style="margin-bottom: 3rem;" >
+    {{ target_user.profile.message }}
+    </h5> -->
+
+    <!-- 25강 UpdateView -->
+    <!-- target_user 가 user 과 같은지 -->
+    {% if target_user == user %}
+
+    {# 5강 UpdateView #}
+    {# update로 보내는 링크 #}
+      <a href="{% url 'accountapp:update' pk=user.pk %}">
+        <p>Chage Info</p>
+      </a>
+
+      {# 26강 DeleteView #}
+        {# delete로 보내는 링크 #}
+      <a href="{% url 'accountapp:delete' pk=user.pk %}">
+        <p>Quit</p>
+      </a>
+
+    {# if target_user 문 끝 #}
+    {% endif %}
+
+  </div>
+
+</div>
+
+<!-- 블록 끝 -->
+{% endblock %}

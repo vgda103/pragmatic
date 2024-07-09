@@ -1,0 +1,83 @@
+<!-- base.html 상송 -->
+{% extends 'base.html' %}
+
+<!-- 스테틱 사용선언 -->
+{% load static %}
+
+
+<!-- base의 block 삽입 될코드 -->
+{% block content %}
+
+<style>
+
+  .container {
+    padding: 0;
+    margin: 0 auto;
+  }
+
+  .container div {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 8px;
+  border-radius: 1rem;
+  }
+
+  .container img {
+    width: 7rem;
+    height: 7rem;
+    object-fit: cover;
+    border-radius: 1rem;
+  }
+
+</style>
+<!-- 프로잭트가 있다면 -->
+{% if project_list %}
+
+  <div class="container">
+    
+    <!-- 게시물 수 만큼 반복 -->
+      {% for project in project_list %}
+
+        <!-- 게시물 링크 -->
+        <a href="{% url 'projectapp:detail' pk=project.pk %}" >
+
+          <!-- 게시물 출력 -->
+          {% include 'snippets/project_card.html'  with project=project %}
+          <!-- {% include 'snippets/card.html'  with article=project %} -->
+           
+        </a>
+
+        {% endfor %}
+
+  </div>
+
+  <script src="{% static 'js/magicgrid.js' %}" ></script>
+{# if 끝 #}
+
+<!-- 프로잭트가 없다면 -->
+{% else %}
+
+  <!-- 게시물이 없다면 출력 -->
+  <div class="text-center">
+    <h1>No Project</h1>
+  </div>
+
+  {% endif %} {# if project_list 끝 #}
+
+<!-- 페이지 표시 -->
+{% include 'snippets/pagination.html' with pag_obj=pag_obj %}
+
+<hr>
+
+<div style="text-align: center;">
+
+  <a href="{% url 'projectapp:create' %}"
+    class="btn btn-dark rounded-pill col-3 mt-3 px-3">
+    Create Project
+  </a>
+
+</div>
+
+<!-- base의 block 삽입 될코드 끝 -->
+{% endblock %}

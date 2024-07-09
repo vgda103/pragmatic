@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<!-- 9강 뼈대 만들기 -->
+ <!-- head.html 파일로 독립 -->
+<!-- <head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>pragmatic</title>
+</head> -->
+<!-- head.html 연결 -->
+{% include 'head.html' %}
+
+<body style="font-family: 'NanumSquareR';">
+
+  <!-- 9강 뼈대 만들기 -->
+  <!-- body_header.html 파일로 독립 -->
+  <!-- <div style="height: 10rem; background-color: #38df81; 
+      border-radius: 1rem; margin: 2rem;">
+  </div> -->
+  <!-- body_header.html 연결 -->
+  {% include 'body_header.html' %}
+
+  <hr>
+
+  <!-- 9강 뼈대 만들기 -->
+  <!-- accountapp/template/accountapp/hello_world.html 파일로 독립 -->
+  <!-- <div style="height: 20rem; background-color: #38df81; 
+      border-radius: 1rem; margin: 2rem;">
+  </div> -->
+  <!-- accountapp/template/accountapp/hello_world.html 연결 -->
+  {% block content %}
+  {% endblock %}
+
+  <hr>
+
+  <!-- 9강 뼈대 만들기 -->
+  <!-- footer.html 파일로 독립 -->
+  <!-- <div style="height: 10rem; background-color: #38df81; 
+      border-radius: 1rem; margin: 2rem;">
+  </div> -->
+  <!-- footer.html 연결 -->
+  {% include 'footer.html' %}
+
+</body>
+
+</html>

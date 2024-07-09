@@ -1,0 +1,23 @@
+<!-- <style>
+  a {
+    color: black;
+  }
+  
+  /* 마우스가 위(오버)에 있는 상태 */
+  a:hover {
+    color: black;
+    text-decoration: none;
+  }
+
+</style> -->
+
+<div style="display: block; text-align: center;">
+
+  <img src="{{ project.image.url }}" alt="">
+
+  <h5 class="mt-2" style="font-family: 'NaumSquareEB';">
+    <!-- truncatechars : 글자 길이 제한 -->
+    {{ project.title | truncatechars:8 }}
+  </h5>
+
+</div>

@@ -1,0 +1,40 @@
+<!-- base.html 상속 -->
+{% extends 'base.html' %}
+
+<!-- 23강 부트스트립 정의 -->
+{% load bootstrap5 %}
+
+<!-- base.html 블록 부분에 삽입 시작 -->
+{% block content %}
+
+<!-- 스타일 : 정렬 -->
+<div style="text-align: center; max-width: 500px; margin: 4rem auto;">
+
+  <div>Login</div>
+
+  <div>
+
+    <!-- form의 post 요청 설정 -->
+    <form action="" method="post">
+
+      <!-- 보안 코드 삽입 -->
+      {% csrf_token %}
+
+      <!-- 기본 form 불러오기 -->
+      <!-- {{ form }} -->
+      <!-- 23강 bootsstrap -->
+       {% bootstrap_form form %}
+
+      <!-- 로그인 버튼 -->
+      <!-- col : 넓이 12가 부모의 100% 이고 6은 부모의 50% 크기 -->
+      <!-- mt : 마진탑 -->
+      <input type="submit" class="btn btn-dark rounded-pill col-6 mt-3">
+
+    </form>
+
+  </div>
+
+</div>
+
+<!-- base.html 블록 부분에 삽입 끝 -->
+{% endblock %}

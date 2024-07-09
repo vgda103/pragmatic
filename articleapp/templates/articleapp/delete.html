@@ -1,0 +1,27 @@
+<!-- base.html 상속 -->
+{% extends 'base.html' %}
+
+<!-- base.html 의 block content 에 삽입될 코드 -->
+{% block content %}
+
+<div style="text-align: center; max-width: 500px; margin: 4rem auto;">
+
+  <!-- 제목 -->
+  <div class="mb-4">
+    <h4>Delete Article : {{ targetarticle.title }}</h4>
+  </div>
+
+  <!-- post 형식으로 action의 주소로 요청을 보낸다 -->
+  <form action="{% url 'articleapp:delete' pk=target_article.pk %}" method="post">
+  <!-- 장고에서 제공하는 보안기능, post 요청시 반드시 필요 -->
+  {% csrf_token %}
+
+  <!-- 클레스 명은 부트스트랩 품을 가져오기 위한 이름 -->
+  <input type="submit" class="btn btn-danger rounded-pill col-6 mt-3" >
+  <!-- form 끝 -->
+  </form>
+
+</div>
+
+<!-- base.html 의 block content 에 삽입될 코드 끝 -->
+{% endblock %}

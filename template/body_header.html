@@ -1,0 +1,126 @@
+<!-- 22강 로인인/아웃 -->
+<div class="pragmatic_header_navigator" style="text-align: center;">
+  
+  <div>
+    <h1 class="Pragmatic_log">Pragmatic</h1>
+  </div>
+
+  
+  <div class="pragmatic_header_navbar">
+    
+    <!-- 35강 Artcle 구현 -->
+    <!-- articleapp의 list.html 로 보내는 링크 -->
+    <a href="{% url 'articleapp:list' %}" class="prgmatic_header_nav">
+      <span>Article</span>
+    </a>
+
+    <!-- 40강 프로젝트 구현 -->
+    <a href="{% url 'projectapp:list' %}" class="prgmatic_header_nav">
+      <span>Projects</span>
+    </a>
+
+    <!-- 43강 Field_Lookeup -->
+    <a href="{% url 'subscribeapp:list' %}" class="prgmatic_header_nav">
+      <span>Subscribeapp</span>
+    </a>
+
+    <!-- user 데이터 확인 -->
+    {% if not user.is_authenticated %}
+
+      <!-- 21강 _CreateView -->
+      <a href="{% url 'accountapp:create' %}" class="prgmatic_header_nav">
+        <span>SinUp</span>
+      </a>
+
+      <!-- button을 누르면 post 형식으로 action 주소로 요청 -->
+      <form method="post" action="{% url 'accountapp:login' %}">
+        <!-- 장고 보안 코드 삽입 -->
+        {% csrf_token %}
+
+        <!-- 버튼 설정 -->
+        <button type="submit" class="btn btn-primary">
+            Login
+        </button>
+
+      </form>
+    
+    <!-- user 데이터가 있다면 -->
+    {% else %}
+      <!-- pk=user.pk : pk에 user.pk 넣는다 -->
+      <a href="{% url 'accountapp:detail' pk=user.pk %}" class="prgmatic_header_nav">
+        <span>Mypage</span>
+      </a>
+
+      <!-- 22강 로인인/아웃 -->
+      <!-- button을 누르면 post 형식으로 action 주소로 요청 -->
+      <form method="post" action="{% url 'accountapp:logout' %}">
+        <!-- 장고 보안 코드 삽입 -->
+          {% csrf_token %}
+          
+          <!-- 버튼 설정 -->
+          <button type="submit" class="btn btn-primary">
+              Logout
+          </button>
+
+      </form>
+  
+    <!-- if 문 끝 -->
+    {% endif %}
+
+  </div>
+
+ </div>
+
+<!-- 405 에러 나서 패기 코드 -->
+<!-- 405 에러는 <a href="{% url 'accountapp:logout' %}?next={{ request.path }}"> 에서
+  get 요청을 하는데 이걸 form 으로 post 요청으로 변경 -->
+<!-- 9강. 뼈대
+<div style="height: 10rem; background-color: #38df81; 
+border-radius: 1rem; margin: 2rem;">
+</div>
+
+10강. style
+ margin-bottom: 2rem 0; 에서 값 값, 입력하면 상하값, 좌우값 으로 적용된다 
+ 기본
+ static/base.css 이동
+ <div style="text-align: center; margin-bottom: 2rem 0;">
+ 11강. CSS
+ <div class="pragmatic_header">
+
+  <div>
+    기본
+    static/base.css 이동
+    <h1 style="font-family: 'Lobster', sans-serif;">Pragmatic</h1>
+    11강. CSS
+    <h1 class="Pragmatic_log">Pragmatic</h1>
+  </div>
+
+  <div>
+
+    <span>nav1</span>
+    <span>nav2</span>
+    <span>nav3</span>
+
+    user.is_authenticated의 not으로 인해 부정문
+    {% if not user.is_authenticated %}
+      {% url 'accountapp:login' %} 주소로 보내고 다음 이동
+      get(?next={{ requst.path }})요청으로 보낸다
+      405 에러나서 수정
+      <a href="{% url 'accountapp:login' %}?next={{ request.path }}">
+        <span>login</span>
+      </a>
+
+    위 조건문이 아닐때 실행
+    {% else %}
+      {% url 'accountapp:logout' %} 주소로 보내고 다음 이동 주소를 
+      get(?next={{ requst.path }})요청으로 보낸다
+      405 에러남
+      <a href="{% url 'accountapp:logout' %}?next={{ request.path }}">      
+        <span>logout</span>
+      </a>
+
+    {% endif %}
+
+  </div>
+
+ </div> -->

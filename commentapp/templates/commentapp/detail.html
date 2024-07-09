@@ -1,0 +1,39 @@
+<!-- 컨테이너 박스및 꾸미기 -->
+<div style="border: 1px solid; text-align: left; 
+            padding: 4%; margin: 1rem 0; border-radius: 1rem;">
+
+  <!-- 작성자 및 작성일 컨탠트 -->
+  <div>
+
+    <strong>
+      <!-- 작성자의 닉네임 출력 -->
+      {{ comment.writer.profile.nickname }}
+    </strong>
+    &nbsp;&nbsp;&nbsp;
+    <!-- 작성 일자 -->
+    {{ comment.created_at }}
+
+  </div>
+
+  <!-- 내용 컨텐트 -->
+  <div style="margin: 1rem 0;">
+    
+    <!-- 내용 -->
+    {{ comment.content }}
+
+  </div>
+
+  <!-- 작성자와 유져가 같다면 표시 -->
+  {% if comment.writer == user %}
+    <!-- 삭제 컨텐트 -->
+    <div style="text-align: right;">
+      <!-- 삭제 링크를 만든다 -->
+      <a href="{% url 'commentapp:delete' pk=comment.pk %}"
+        class="btn btn-danger rounded-pill">
+        Delete
+      </a>
+
+    </div>
+    {% endif %}
+
+</div>

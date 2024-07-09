@@ -1,0 +1,35 @@
+<!-- base.html 상속 -->
+{% extends 'base.html' %}
+
+<!-- block에 삽입될 코드 -->
+{% block content %}
+
+<div>
+
+  <div style="text-align: center; max-width: 700px; margin: 4rem auto;">
+    
+    <!-- 36강 아티클 구현 - style 추가 -->
+    <!-- context_object_name의 이미지 출력,  -->
+    <img style="height: 12rem; width: 12rem; border-radius: 2rem; margin-bottom: 2rem;" 
+      src="{{ target_project.image.url }}" alt="">
+    
+    <h2 style="font-family: 'NanumSquareB';">
+      <!-- views의 context_object.title의 멤버 출력 -->
+      {{ target_project.title }}
+    </h2>
+
+    <h5 style="margin-bottom: 3rem;" >
+      <!-- views의 context_object.description의 멤버 출력 -->
+      {{ target_project.description }}
+    </h5>
+
+  </div>
+  
+  <div>
+    {% include 'snippets/list_fragment.html' with article_list=object_list %}
+  </div>
+
+</div>
+
+<!-- 블록 끝 -->
+{% endblock %}

@@ -1,0 +1,72 @@
+
+<!-- 스테틱 사용 선언 -->
+{% load static %}
+
+<!-- 기본 -->
+<style>
+
+  .container {
+    padding: 0;
+    margin: 0, auto;
+  }
+
+  .container a {
+    width: 45%;
+    max-width: 250px;
+  }
+
+  .container div {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 8px;
+  border-radius: 1rem;
+}
+
+.container img {
+  width: 100%;
+  border-radius: 1rem;
+}
+
+</style>
+
+
+{% if article_list %}
+  {# 기본 #}
+  <div class="container">
+    
+      {% for article in article_list %}
+        <a href="{% url 'articleapp:detail' pk=article.pk %}">
+
+          {# include : 탬플릿에서 다른 탬플릿 파일을 연결한다 #}
+          {# with article=article : article란 이름으로 article을 전달한다 #}
+          {% include 'snippets/card.html' with article=article %}
+
+        </a>
+
+        {% endfor %} {# for article 끝 #}
+
+  </div>
+  
+  <script src="{% static 'js/magicgrid.js' %}" ></script>
+  {# if문 끝 #}
+
+{% else %}
+  <div class="text-center">
+    <h1>No Article YET!</h1>
+  </div>
+
+  {% endif %} {# if article_list 끝 #}
+
+<!-- 패이지 표시 -->
+<!-- pag_obj는 ListVeiw의 하위 클레스 -->
+<!-- 'snippets/pagination.html' 경로의 파일을 포함(include)하고, 
+      pag_obj 변수를 해당 템플릿에 전달 -->
+{% include 'snippets/pagination.html' with pag_obj=pag_obj %}
+
+<div style="text-align: center;" >
+  <a href="{% url 'articleapp:create' %}" 
+    class="btn btn-dark rounded-pill col-3 mt-3 px-3" >
+    Cerate Article
+  </a>
+</div>

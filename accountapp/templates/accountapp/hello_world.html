@@ -1,0 +1,76 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+  <!-- 13강 rem 실습 -->
+  <!-- <style>
+    .testing {
+      background-color: white;
+      height: 3rem;
+      width: 3rem;
+      margin: 1rem;
+    }
+  </style> -->
+  
+  <div style="height: 20rem; text-align: center; 
+      border-radius: 1rem; margin: 2rem;">
+
+      <!-- 17강. post로 DB 저장 -->
+      <h1 style="font-family: 'Lobster', sans-serif;">
+        hello_world list!!
+      </h1>
+
+      <!-- 16강 http, get, post -->
+       <!-- action : 인터넷 주소, ulrs.py 에 등록된 주소를 넣으면 됨, method : post, get -->
+       <form action="/accountapp/hello_world/" method="post">
+        <!-- 없으면 에러남 : Forbidden (403) CSRF verification failed. Request aborted. -->
+        <!-- 장고에서 서버에 요청을 보낼시 반드시 넣아야 하는 보안기능을 삽입하는 문구 -->
+        {% csrf_token %}
+
+        <!-- 17강. post로 DB 저장 -->
+        <div>
+          <input type="text" name="hello_world_input">
+        </div>
+
+        <!-- class 이름 틀리지 말것. 부스트스트랩에서 기본 스타일값을 사용하고 있다 -->
+        <input type="submit" class="btn btn-primary" value="POST">
+       </form>
+
+      <!-- 17강 post 서버 저장 : {{ text }} 변경  -->
+       <!-- 장고 if문 탬플릿 태그 -->
+       {% if hello_world_list %}
+
+          <!-- 18강 DB 접근 -->
+           {% for hello_world in hello_world_list %}
+            <h4>
+              {{ hello_world.text }}
+            </h4>
+           {% endfor %}
+
+       <!-- 17강 post 서버 저장 -->
+       <!-- <h1>
+        장고에서 변수 추가 태그
+        {{ hello_world_list }}
+       </h1> -->
+
+       <!-- 장고 if문 종료 탬플릿 태그 -->
+       {% endif %}
+
+      <!-- 13강 rem 실습 -->
+      <!-- <div class="testing" style="display: block;">block1</div>
+      <div class="testing" style="display: block;">block2</div> -->
+      <!-- <div class="testing" style="display: inline; width: 48px; height: 3rem;">inline1</div> -->
+      <!-- <div class="testing" style="display: inline-block; width: 48px; height: 48px;">
+        inline-block1</div> -->
+      <!-- <div class="testing" style="display: inline-block; width: 3em; height: 3em;">
+        inline-block2</div> -->
+      <!-- <div class="testing" style="display: inline-block; width: 3rem; height: 3rem;">
+        inline-block3</div> -->
+      <!-- <div class="testing" style="display: inline-block; width: 30%; height: 30%;">
+        inline-block4</div> -->
+      <!-- <div class="testing" style="display: none;">None</div>
+      <div class="testing" style="display: inline-block;">inline-block</div> -->
+      <!-- <div class="testing">defutl</div> -->
+  </div>
+
+{% endblock %}

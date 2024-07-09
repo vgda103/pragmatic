@@ -1,0 +1,74 @@
+<!-- base.html 상속 -->
+{% extends 'base.html' %}
+
+<!-- block에 삽입될 코드 -->
+{% block content %}
+
+<div>
+
+  <div style="text-align: center; max-width: 700px; margin: 4rem auto;">
+    
+    <!-- views의 context_object_name의 멤버 출력 -->
+    <h1>
+      {{ target_article.title }}
+    </h1>
+
+    <!-- 36강 아티클 구현 -->
+    <!-- 사용자 닉네임 출력 -->
+    <h5>
+      {{ target_article.writer.profile.nickname }}
+    </h5>
+
+    <hr>
+
+    <!-- 36강 아티클 구현 - style 추가 -->
+    <!-- context_object_name의 이미지 출력,  -->
+    <img style="width: 100%; border-radius: 2rem;" 
+      src="{{ target_article.image.url }}" alt="">
+
+    <!-- context_object_name의 멤버 출력 -->
+    <!-- 44강 위지윅 - 수정 -->
+    <!-- <p> - 기존
+      {{ target_article.content }}
+    </p> -->
+    <div class="text-start">
+      <!-- safe : 태그 내용을 벗겨낸다 -->
+      {{ target_article.content | safe }}
+    </div>
+
+    <!-- 35강 아티클구현 -->
+    {% if target_article.writer == user %}
+      <!-- 수정버튼 -->
+      <a href="{% url 'articleapp:update' pk=target_article.pk %}"
+        class="btn btn-primary rounded-pill col-3">
+        Update
+      </a>
+
+      <!-- 35강 아티클구현 -->
+      <!-- 삭제버튼 -->
+      <a href="{% url 'articleapp:delete' pk=target_article.pk %}"
+        class="btn btn-danger rounded-pill col-3">
+        Delete
+      </a>
+
+      {% endif %} {# if target_article.writer 끝 #}   
+      
+      <hr>
+
+      <!-- 38. 코맨트 마무리 -->
+      <!-- 코맨트창 출력 -->
+      <!-- target_aritcle.comment.all : target_aritcle.comment의 모두 가져온다 -->
+      {% for comment in target_article.comment.all %}
+        <!-- include의 파일내용을 가져오고, with comment이름으로 comment객체를 넘긴다 -->       
+        {% include 'commentapp/detail.html' with comment=comment %}
+        {% endfor %} {# for comment 끝 #}
+
+      <!-- include의 파일내용을 가져오고, with article이름으로 target_article객체를 넘긴다 -->
+      {% include 'commentapp/create.html' with article=target_article %}
+
+  </div>
+  
+</div>
+
+<!-- 블록 끝 -->
+{% endblock %}

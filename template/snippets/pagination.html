@@ -1,0 +1,47 @@
+<!-- 페이지네이션 버튼들을 감싸는 컨테이너와 스타일 설정 -->
+<div style="text-align: center; margin: 1rem 0;">
+
+  <!-- page_obj.has_previous : 이전 페이지가 있는지 없는지 알려주는 논리형 맴버 -->
+  {% if page_obj.has_previous %}
+
+    <!-- href:이전 페이지로 넘겨주는 링크를 생성, class:부트스트랩 폼적용 이름  -->
+    <!-- 기존 -->
+    <!-- <a href="{% url 'articleapp:list' %}?page={{ page_obj.previous_page_number }}"
+      class="btn btn-secondary rounded-pill"> -->
+    <!-- 40강 프로젝트앱 -->
+    <a href="?page={{ page_obj.previous_page_number }}"
+      class="btn btn-secondary rounded-pill">
+      <!-- 이전 페이지 -->
+      {{ page_obj.previous_page_number }}
+    </a>
+
+    {% endif %} {# if page_obj.has_previous 끝 #}
+
+  <!-- 현재 페이지의 링크를 생성 -->
+  <!-- 기존 -->
+  <!-- <a href="{% url 'articleapp:list' %}?page={{ page_obj.number }}"
+    class="btn btn-secondary rounded-pill active"> -->
+  <!-- 40강 프로잭트앱 -->
+  <a href="?page={{ page_obj.number }}"
+    class="btn btn-secondary rounded-pill active">
+    <!-- 현재 페이지 출력 -->
+    {{ page_obj.number }}
+  </a>
+
+  <!-- page_obj.has_next : 다음 페이지가 있는지 없는지 알려주는 논리형 맴버 -->
+  {% if page_obj.has_next %}
+
+    <!-- href:다음 페이지로 넘겨주는 링크를 생성, class:부트스트립 폼적용 이름  -->
+    <!-- 기존 -->
+    <!-- <a href="{% url 'articleapp:list' %}?page={{ page_obj.next_page_number }}"
+      class="btn btn-secondary rounded-pill"> -->
+    <!-- 40강 프로잭트앱 -->
+    <a href="?page={{ page_obj.next_page_number }}"
+      class="btn btn-secondary rounded-pill">
+      <!-- 다음 페이지 출력 -->
+      {{ page_obj.next_page_number }}
+    </a>
+
+    {% endif %} {# page_obj.has_next 끝 #}
+
+</div>

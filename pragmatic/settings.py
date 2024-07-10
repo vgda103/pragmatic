@@ -35,7 +35,7 @@ environ.Env.read_env(
 SECRET_KEY = env( 'SECRET_KEY' )
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
 # 38. 모바일 디버깅 - 수정
 # 기존

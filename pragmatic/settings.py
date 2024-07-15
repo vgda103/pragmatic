@@ -40,7 +40,10 @@ DEBUG = False
 # 38. 모바일 디버깅 - 수정
 # 기존
 # ALLOWED_HOSTS = []
-ALLOWED_HOSTS = ['*']
+ALLOWED_HOSTS = [
+    'localhost',
+    '3.38.211.132',
+    ]
 
 # Application definition
 
